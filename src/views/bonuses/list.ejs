@@ -1,0 +1,32 @@
+<section class="section">
+  <div class="container">
+    <div class="level">
+      <div class="level-left">
+        <h1 class="title">Bonos</h1>
+      </div>
+      <div class="level-right">
+        <a class="button is-primary" href="/bonos/new">Nuevo</a>
+      </div>
+    </div>
+    <table class="table is-fullwidth is-striped">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Tipo</th>
+          <th>Monto</th>
+          <th>Activo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% bonuses.forEach(b => { %>
+          <tr>
+            <td><%= b.name %></td>
+            <td><%= b.amountType %></td>
+            <td><%= b.amount %></td>
+            <td><%= b.active ? 'Sí' : 'No' %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>

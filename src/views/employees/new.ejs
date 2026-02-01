@@ -1,0 +1,69 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title">Nuevo empleado</h1>
+    <form action="/empleados" method="POST" class="box">
+      <div class="field">
+        <label class="label">Nombre</label>
+        <div class="control">
+          <input class="input" type="text" name="firstName" required />
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Apellidos</label>
+        <div class="control">
+          <input class="input" type="text" name="lastName" required />
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">CURP</label>
+        <div class="control">
+          <input class="input" type="text" name="curp" required />
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Fecha de ingreso</label>
+        <div class="control">
+          <input class="input" type="date" name="hireDate" required />
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Salario diario</label>
+        <div class="control">
+          <input class="input" type="number" step="0.01" name="dailySalary" required />
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Departamento</label>
+        <div class="control">
+          <div class="select">
+            <select name="departmentId" required>
+              <% departments.forEach(d => { %>
+                <option value="<%= d.id %>"><%= d.name %></option>
+              <% }) %>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Puesto</label>
+        <div class="control">
+          <div class="select">
+            <select name="positionId" required>
+              <% positions.forEach(p => { %>
+                <option value="<%= p.id %>"><%= p.name %></option>
+              <% }) %>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-primary" type="submit">Guardar</button>
+        </div>
+        <div class="control">
+          <a class="button is-light" href="/empleados">Cancelar</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

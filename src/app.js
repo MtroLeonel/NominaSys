@@ -20,7 +20,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Rutas
 const indexRoutes = require('./routes/index');
+const departmentRoutes = require('./routes/departments');
+const positionRoutes = require('./routes/positions');
+const employeeRoutes = require('./routes/employees');
+const payrollRoutes = require('./routes/payroll');
+const bitacoraRoutes = require('./routes/bitacora');
+const bonusRoutes = require('./routes/bonuses');
+
 app.use('/', indexRoutes);
+app.use('/departamentos', departmentRoutes);
+app.use('/puestos', positionRoutes);
+app.use('/empleados', employeeRoutes);
+app.use('/payroll', payrollRoutes);
+app.use('/bitacora', bitacoraRoutes);
+app.use('/bonos', bonusRoutes);
 
 // Manejo de errores 404
 app.use((req, res) => {

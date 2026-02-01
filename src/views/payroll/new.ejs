@@ -1,0 +1,39 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title">Nuevo periodo de nómina</h1>
+    <form action="/payroll" method="POST" class="box">
+      <div class="field">
+        <label class="label">Tipo</label>
+        <div class="control">
+          <div class="select">
+            <select name="type" required>
+              <option value="semanal">Semanal</option>
+              <option value="quincenal" selected>Quincenal</option>
+              <option value="mensual">Mensual</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Fecha inicio</label>
+        <div class="control">
+          <input class="input" type="date" name="startDate" required />
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Fecha fin</label>
+        <div class="control">
+          <input class="input" type="date" name="endDate" required />
+        </div>
+      </div>
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-primary" type="submit">Guardar</button>
+        </div>
+        <div class="control">
+          <a class="button is-light" href="/payroll">Cancelar</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

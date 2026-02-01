@@ -1,0 +1,31 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title">Bitácora de cambios</h1>
+    <table class="table is-fullwidth is-striped">
+      <thead>
+        <tr>
+          <th>Empleado</th>
+          <th>Tipo</th>
+          <th>Anterior</th>
+          <th>Nuevo</th>
+          <th>Motivo</th>
+          <th>Usuario</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% logs.forEach(log => { %>
+          <tr>
+            <td><%= log.Employee ? log.Employee.firstName + ' ' + log.Employee.lastName : '-' %></td>
+            <td><%= log.changeType %></td>
+            <td><%= log.previousValue %></td>
+            <td><%= log.newValue %></td>
+            <td><%= log.reason || '-' %></td>
+            <td><%= log.User ? log.User.email : '-' %></td>
+            <td><%= log.createdAt.toISOString().slice(0,10) %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>

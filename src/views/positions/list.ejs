@@ -1,0 +1,32 @@
+<section class="section">
+  <div class="container">
+    <div class="level">
+      <div class="level-left">
+        <h1 class="title">Puestos</h1>
+      </div>
+      <div class="level-right">
+        <a class="button is-primary" href="/puestos/new">Nuevo</a>
+      </div>
+    </div>
+    <table class="table is-fullwidth is-striped">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Nivel</th>
+          <th>Sueldo base</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% positions.forEach(p => { %>
+          <tr>
+            <td><%= p.name %></td>
+            <td><%= p.level || '-' %></td>
+            <td>$<%= p.baseSalary %></td>
+            <td><%= p.status %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>

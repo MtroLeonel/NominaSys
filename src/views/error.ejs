@@ -1,0 +1,9 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title"><%= title %></h1>
+    <p><%= message %></p>
+    <% if (error && error.status) { %>
+      <p>Status: <%= error.status %></p>
+    <% } %>
+  </div>
+</section>

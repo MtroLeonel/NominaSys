@@ -1,0 +1,38 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title">Nuevo departamento</h1>
+    <form action="/departamentos" method="POST" class="box">
+      <div class="field">
+        <label class="label">Nombre</label>
+        <div class="control">
+          <input class="input" type="text" name="name" required />
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Clave</label>
+        <div class="control">
+          <input class="input" type="text" name="code" required />
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Estado</label>
+        <div class="control">
+          <div class="select">
+            <select name="status">
+              <option value="activo">Activo</option>
+              <option value="inactivo">Inactivo</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-primary" type="submit">Guardar</button>
+        </div>
+        <div class="control">
+          <a class="button is-light" href="/departamentos">Cancelar</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,32 @@
+<section class="section">
+  <div class="container">
+    <div class="level">
+      <div class="level-left">
+        <h1 class="title">Departamentos</h1>
+      </div>
+      <div class="level-right">
+        <a class="button is-primary" href="/departamentos/new">Nuevo</a>
+      </div>
+    </div>
+    <table class="table is-fullwidth is-striped">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Clave</th>
+          <th>Estado</th>
+          <th>Creado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% departments.forEach(d => { %>
+          <tr>
+            <td><%= d.name %></td>
+            <td><%= d.code %></td>
+            <td><%= d.status %></td>
+            <td><%= d.createdAt.toISOString().slice(0,10) %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>

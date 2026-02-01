@@ -1,5 +1,3 @@
-const db = require('../models');
-
 const indexController = {
   index: async (req, res) => {
     try {
