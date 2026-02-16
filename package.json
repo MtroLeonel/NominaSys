@@ -1,6 +1,7 @@
 {
   "name": "practicanomina",
   "version": "1.0.0",
+  "description": "Sistema completo de gestión de nómina empresarial con soporte para MySQL y SQL Server",
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
@@ -8,15 +9,32 @@
     "seed": "node src/seed.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "keywords": [
+    "nomina",
+    "payroll",
+    "rrhh",
+    "gestion-empleados",
+    "sequelize",
+    "express",
+    "mysql",
+    "mssql"
+  ],
+  "author": "CESUN Universidad - Análisis de Requerimientos 2026",
   "license": "ISC",
-  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tu-usuario/practicanomina.git"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
   "dependencies": {
     "dotenv": "^17.2.3",
     "ejs": "^4.0.1",
     "express": "^5.2.1",
     "express-ejs-layouts": "^2.5.1",
-    "mysql2": "^3.16.2",
+    "mysql2": "^3.17.1",
     "sequelize": "^6.37.7"
   },
   "devDependencies": {

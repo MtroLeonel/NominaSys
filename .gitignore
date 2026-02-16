@@ -1,1 +1,118 @@
-node_modules
+# ==================================
+# Dependencias
+# ==================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# ==================================
+# Variables de Entorno (¡IMPORTANTE!)
+# ==================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ==================================
+# IDE / Editores
+# ==================================
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# JetBrains (WebStorm, IntelliJ, etc.)
+.idea/
+*.iml
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# ==================================
+# Sistema Operativo
+# ==================================
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+.directory
+
+# ==================================
+# Logs
+# ==================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# ==================================
+# Base de Datos
+# ==================================
+# Archivos de base de datos locales
+*.sqlite
+*.sqlite3
+*.db
+
+# Backups
+*.sql.bak
+*.dump
+
+# ==================================
+# Temporal / Cache
+# ==================================
+tmp/
+temp/
+.cache/
+*.tmp
+*.temp
+
+# ==================================
+# Build / Dist
+# ==================================
+build/
+dist/
+out/
+
+# ==================================
+# Testing
+# ==================================
+coverage/
+.nyc_output/
+*.test.js.snap
+
+# ==================================
+# PM2
+# ==================================
+.pm2/
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# ==================================
+# Uploads / User Files
+# ==================================
+uploads/
+public/uploads/
+
+# ==================================
+# Otros
+# ==================================
+.env.backup
+*.bak
+*.swp
+*.swo
+*~.nib
