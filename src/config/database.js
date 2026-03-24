@@ -1,14 +1,6 @@
 require('dotenv').config();
 
-// Detectar el dialecto de base de datos (postgres o mysql)
-const dialect = process.env.DB_DIALECT || 'postgres';
-
-// Configurar puerto por defecto según el dialecto
-const defaultPorts = {
-  postgres: 5432,
-  mysql: 3306
-};
-const defaultPort = defaultPorts[dialect] || 5432;
+// PostgreSQL configuration
 const pgSslMode = (process.env.DB_SSL_MODE || '').toLowerCase();
 
 const getDbHost = () => {
@@ -16,30 +8,20 @@ const getDbHost = () => {
   return (process.env.DB_HOST || '').split('?')[0];
 };
 
-// Configurar opciones específicas del dialecto
+// Configurar opciones de PostgreSQL
 const getDialectOptions = () => {
-  if (dialect === 'postgres') {
-    const options = {
-      connectTimeout: 10000
-    };
+  const options = {
+    connectTimeout: 10000
+  };
 
-    if (pgSslMode === 'require') {
-      options.ssl = {
-        require: true,
-        rejectUnauthorized: false
-      };
-    }
-
-    return options;
-  }
-
-  if (dialect === 'mysql') {
-    return {
-      connectTimeout: 10000
+  if (pgSslMode === 'require') {
+    options.ssl = {
+      require: true,
+      rejectUnauthorized: false
     };
   }
 
-  return {};
+  return options;
 };
 
 // Configuración base
@@ -47,8 +29,8 @@ const baseConfig = {
   username: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   host: getDbHost(),
-  port: process.env.DB_PORT || defaultPort,
-  dialect: dialect,
+  port: process.env.DB_PORT || 5432,
+  dialect: 'postgres',
   dialectOptions: getDialectOptions()
 };
 

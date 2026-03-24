@@ -7,7 +7,7 @@ Aplicacion web para gestion de empleados, departamentos, puestos, bonos y calcul
 - Node.js + Express.js
 - Sequelize ORM
 - EJS + Bulma CSS
-- PostgreSQL o MySQL
+- PostgreSQL
 
 ## Inicio Rapido
 
@@ -26,21 +26,9 @@ copy .env.example .env
 3. Configura tu base de datos en .env:
 
 ```env
-DB_DIALECT=postgres
 DB_HOST=localhost
 DB_PORT=5432
 DB_USER=postgres
-DB_PASSWORD=tu_contrasena
-DB_NAME=practicanomina
-```
-
-Para MySQL:
-
-```env
-DB_DIALECT=mysql
-DB_HOST=localhost
-DB_PORT=3306
-DB_USER=root
 DB_PASSWORD=tu_contrasena
 DB_NAME=practicanomina
 ```

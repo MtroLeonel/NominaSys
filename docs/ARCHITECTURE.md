@@ -62,7 +62,7 @@ Este documento explica visualmente cómo funciona el sistema de nómina.
                          ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                  BASE DE DATOS                               │
-│              (PostgreSQL / MySQL)                            │
+│              (PostgreSQL)                               │
 │  ┌─────────┐ ┌──────────┐ ┌──────────┐ ┌─────────┐         │
 │  │Employees│ │Department│ │Positions │ │Bonuses  │         │
 │  └─────────┘ └──────────┘ └──────────┘ └─────────┘         │
@@ -367,51 +367,53 @@ FIN: Usuario ve periodo con todas las entradas generadas
                └──────────────────────────┘
 ```
 
-## 🔐 Configuración Multi-Base de Datos
+## 🔐 Configuración de Base de Datos PostgreSQL
 
 ```
-┌───────────────┐
-│  .env file    │
-│───────────────│
-│ DB_DIALECT=   │ ─┐
-│  mysql        │  │
-└───────────────┘  │
-                   │
-┌───────────────┐  │
-│ database.js   │◄─┘
-│───────────────│
-│               │
-│ const dialect │
-│   = process   │
-│   .env        │
-│   .DB_DIALECT │
-│               │
-│ if (dialect   │
-│   === 'mysql')│──►┌──────────────┐
-│   port = 3306 │   │ MySQL Config │
-│   options = {…}   │  • port 3306 │
-│               │   │  • timeout   │
-│ if (dialect   │   └──────────────┘
-│   === 'postgres')►┌──────────────┐
-│   port = 5432 │   │ PostgreSQL   │
-│   options = {…}   │  • port 5432 │
-│               │   │  • timeout   │
-└───────┬───────┘   │  • ssl opt   │
-        │           └──────────────┘
-        │
-        ▼
-┌───────────────────┐
-│   Sequelize       │
-│   Connection      │
-└───────────────────┘
-        │
-        ┌───────────┴───────────┐
-        │                       │
-        ▼                       ▼
-┌──────────────┐        ┌──────────────┐
-│    MySQL     │        │ PostgreSQL   │
-│   Database   │        │   Database   │
-└──────────────┘        └──────────────┘
+┌───────────────────────────────────────┐
+│         .env Configuration            │
+│───────────────────────────────────────│
+│  DB_HOST=localhost                    │
+│  DB_PORT=5432                         │
+│  DB_USER=postgres                     │
+│  DB_PASSWORD=tu_contraseña            │
+│  DB_NAME=practicanomina               │
+│  DB_SSL_MODE=require (opcional)       │
+└────────────────┬──────────────────────┘
+                 │
+                 ▼
+┌───────────────────────────────────────┐
+│       src/config/database.js          │
+│───────────────────────────────────────│
+│                                       │
+│  const dialect = 'postgres'           │
+│  const port = 5432                    │
+│                                       │
+│  if (pgSslMode === 'require') {       │
+│    options.ssl = {                    │
+│      require: true,                   │
+│      rejectUnauthorized: false        │
+│    }                                  │
+│  }                                    │
+│                                       │
+│  const baseConfig = {                 │
+│    dialect: 'postgres',               │
+│    port: 5432,                        │
+│    dialectOptions: options            │
+│  }                                    │
+│                                       │
+└────────────┬─────────────────────────┘
+             │
+             ▼
+┌───────────────────────────────────────┐
+│   Sequelize PostgreSQL Connection     │
+└────────────┬─────────────────────────┘
+             │
+             ▼
+┌───────────────────────────────────────┐
+│      PostgreSQL Database              │
+│  practicanomina (localhost:5432)      │
+└───────────────────────────────────────┘
 ```
 
 ## 📝 Modelo de Datos - Diagrama Entidad-Relación
@@ -671,7 +673,7 @@ CONSTANTES:
 │          └─► Controllers (Lógica)                       │
 │                                                          │
 │  Base de Datos                                           │
-│  └─► PostgreSQL / MySQL (Flexible)                      │
+│  └─► PostgreSQL                                         │
 │      └─► 9 Tablas principales                           │
 │                                                          │
 │  Funcionalidades                                         │

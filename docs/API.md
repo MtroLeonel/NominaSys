@@ -15,7 +15,7 @@ Controllers (Lógica de negocio)
     ↓
 Models (Sequelize ORM)
     ↓
-Base de Datos (PostgreSQL/MySQL)
+Base de Datos (PostgreSQL)
 ```
 
 ## 📂 Estructura de Carpetas
