@@ -1,73 +1,75 @@
-<nav class="navbar is-primary" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-        <a class="navbar-item" href="/">
+<aside class="sidebar-menu" aria-label="Menú principal">
+    <div class="sidebar-brand">
+        <a href="/">
             <strong>Práctica Nómina</strong>
-        </a>
-
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
         </a>
     </div>
 
-    <div id="navbarMenu" class="navbar-menu">
-        <div class="navbar-start">
-            <a class="navbar-item" href="/">
+    <ul class="menu-list sidebar-list">
+        <li>
+            <a href="/">
                 <span class="icon">
                     <i class="fas fa-home"></i>
                 </span>
                 <span>Inicio</span>
             </a>
-            <a class="navbar-item" href="/empleados">
+        </li>
+        <li>
+            <a href="/empleados">
                 <span class="icon">
                     <i class="fas fa-users"></i>
                 </span>
                 <span>Empleados</span>
             </a>
-            <a class="navbar-item" href="/departamentos">
+        </li>
+        <li>
+            <a href="/departamentos">
                 <span class="icon">
                     <i class="fas fa-sitemap"></i>
                 </span>
                 <span>Departamentos</span>
             </a>
-            <a class="navbar-item" href="/puestos">
+        </li>
+        <li>
+            <a href="/puestos">
                 <span class="icon">
                     <i class="fas fa-briefcase"></i>
                 </span>
                 <span>Puestos</span>
             </a>
-            <a class="navbar-item" href="/payroll">
+        </li>
+        <li>
+            <a href="/payroll">
                 <span class="icon">
                     <i class="fas fa-money-bill-wave"></i>
                 </span>
                 <span>Nómina</span>
             </a>
-            <a class="navbar-item" href="/bonos">
+        </li>
+        <li>
+            <a href="/bonos">
                 <span class="icon">
                     <i class="fas fa-gift"></i>
                 </span>
                 <span>Bonos</span>
             </a>
-            <a class="navbar-item" href="/bitacora">
+        </li>
+        <li>
+            <a href="/bitacora">
                 <span class="icon">
                     <i class="fas fa-clipboard-list"></i>
                 </span>
                 <span>Bitácora</span>
             </a>
-        </div>
+        </li>
+    </ul>
 
-        <div class="navbar-end">
-            <div class="navbar-item">
-                <div class="buttons">
-                    <a class="button is-light">
-                        <span class="icon">
-                            <i class="fas fa-user"></i>
-                        </span>
-                        <span>Perfil</span>
-                    </a>
-                </div>
-            </div>
-        </div>
+    <div class="sidebar-profile">
+        <a class="button is-light is-fullwidth">
+            <span class="icon">
+                <i class="fas fa-user"></i>
+            </span>
+            <span>Perfil</span>
+        </a>
     </div>
-</nav>
+</aside>

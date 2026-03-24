@@ -1,6 +1,6 @@
 # 📋 Sistema de Gestión de Nómina
 
-Sistema completo de gestión de nómina empresarial desarrollado con Node.js, Express.js y Sequelize ORM. Soporta múltiples bases de datos (MySQL y SQL Server/MSSQL) con una arquitectura MVC limpia y escalable.
+Sistema completo de gestión de nómina empresarial desarrollado con Node.js, Express.js y Sequelize ORM. Soporta múltiples bases de datos (PostgreSQL y SQL Server/MSSQL) con una arquitectura MVC limpia y escalable.
 
 ## 🎯 Características Principales
 
@@ -11,7 +11,7 @@ Sistema completo de gestión de nómina empresarial desarrollado con Node.js, Ex
 - ✅ **Sistema de Bonos**: Bonos en porcentaje o monto fijo
 - ✅ **Bitácora de Cambios**: Auditoría completa de modificaciones
 - ✅ **Interfaz Web Intuitiva**: Diseño moderno con Bulma CSS
-- ✅ **Multi-Base de Datos**: Soporte para MySQL y SQL Server
+- ✅ **Multi-Base de Datos**: Soporte para PostgreSQL y SQL Server
 
 ## 🛠️ Tecnologías Utilizadas
 
@@ -20,7 +20,7 @@ Sistema completo de gestión de nómina empresarial desarrollado con Node.js, Ex
 | **Node.js** | Runtime de JavaScript |
 | **Express.js 5** | Framework web |
 | **Sequelize 6** | ORM para bases de datos |
-| **MySQL2 / Tedious** | Drivers de base de datos |
+| **pg / pg-hstore / Tedious** | Drivers de base de datos |
 | **EJS** | Motor de plantillas |
 | **Bulma CSS** | Framework CSS |
 | **dotenv** | Variables de entorno |
@@ -34,7 +34,7 @@ Antes de instalar, asegúrate de tener:
 - **Node.js** v14 o superior ([Descargar](https://nodejs.org/))
 - **npm** v6 o superior (viene con Node.js)
 - **Base de datos** (una de las siguientes):
-  - **MySQL** v5.7 o superior ([Descargar](https://dev.mysql.com/downloads/mysql/))
+  - **PostgreSQL** v13 o superior ([Descargar](https://www.postgresql.org/download/))
   - **SQL Server** 2016 o superior ([Descargar](https://www.microsoft.com/sql-server/))
 
 ## 🚀 Instalación
@@ -53,7 +53,7 @@ npm install
 
 ### 3. Configurar base de datos
 
-#### Opción A: MySQL
+#### Opción A: PostgreSQL
 
 1. Crear la base de datos:
 ```sql
@@ -66,11 +66,11 @@ CREATE DATABASE practicanomina;
 PORT=3000
 NODE_ENV=development
 
-# Configuración de MySQL
-DB_DIALECT=mysql
+# Configuración de PostgreSQL
+DB_DIALECT=postgres
 DB_HOST=localhost
-DB_PORT=3306
-DB_USER=root
+DB_PORT=5432
+DB_USER=postgres
 DB_PASSWORD=tu_contraseña
 DB_NAME=practicanomina
 ```
@@ -403,10 +403,10 @@ PORT=3000                    # Puerto del servidor (default: 3000)
 NODE_ENV=development         # Ambiente: development, test, production
 
 # Base de Datos
-DB_DIALECT=mysql            # Dialecto: mysql o mssql
+DB_DIALECT=postgres         # Dialecto: postgres o mssql
 DB_HOST=localhost           # Host de la base de datos
-DB_PORT=3306                # Puerto (3306 para MySQL, 1433 para MSSQL)
-DB_USER=root                # Usuario de la base de datos
+DB_PORT=5432                # Puerto (5432 para PostgreSQL, 1433 para MSSQL)
+DB_USER=postgres            # Usuario de la base de datos
 DB_PASSWORD=password        # Contraseña
 DB_NAME=practicanomina      # Nombre de la base de datos
 
@@ -416,14 +416,14 @@ DB_LOGGING=true             # true para ver queries SQL en consola
 
 ### Cambiar Base de Datos
 
-Para cambiar de MySQL a SQL Server (o viceversa):
+Para cambiar de PostgreSQL a SQL Server (o viceversa):
 
 1. Actualizar `DB_DIALECT` en `.env`:
-   - `mysql` para MySQL
+  - `postgres` para PostgreSQL
    - `mssql` para SQL Server
 
 2. Actualizar puerto si es necesario:
-   - MySQL: `DB_PORT=3306`
+  - PostgreSQL: `DB_PORT=5432`
    - MSSQL: `DB_PORT=1433`
 
 3. Reiniciar el servidor:
@@ -439,7 +439,7 @@ Para desplegar en producción:
 ```env
 NODE_ENV=production
 PORT=80
-DB_DIALECT=mysql
+DB_DIALECT=postgres
 DB_HOST=tu-servidor-db.com
 DB_USER=usuario_produccion
 DB_PASSWORD=contraseña_segura
@@ -470,15 +470,13 @@ npm install
 **Verificar:**
 1. La base de datos está corriendo
 2. Las credenciales en `.env` son correctas
-3. El puerto es el correcto (3306 para MySQL, 1433 para MSSQL)
+3. El puerto es el correcto (5432 para PostgreSQL, 1433 para MSSQL)
 4. El firewall permite la conexión
 
-**Para MySQL:**
+**Para PostgreSQL:**
 ```bash
-# Verificar que MySQL está corriendo
-mysql.server status
-# o en Windows
-sc query MySQL80
+# Verificar que PostgreSQL está corriendo (Windows)
+sc query postgresql-x64-16
 ```
 
 **Para SQL Server:**
@@ -506,10 +504,9 @@ npm run dev
 
 1. Verificar que la base de datos existe
 2. Verificar credenciales
-3. Para MySQL, verificar que el usuario tiene permisos:
+3. Para PostgreSQL, verificar que el usuario tiene permisos:
 ```sql
-GRANT ALL PRIVILEGES ON practicanomina.* TO 'usuario'@'localhost';
-FLUSH PRIVILEGES;
+GRANT ALL PRIVILEGES ON DATABASE practicanomina TO usuario;
 ```
 
 ### Datos de prueba no se crean

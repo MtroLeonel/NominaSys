@@ -26,6 +26,7 @@ const employeeRoutes = require('./routes/employees');
 const payrollRoutes = require('./routes/payroll');
 const bitacoraRoutes = require('./routes/bitacora');
 const bonusRoutes = require('./routes/bonuses');
+const apiRoutes = require('./routes/api');
 
 app.use('/', indexRoutes);
 app.use('/departamentos', departmentRoutes);
@@ -34,9 +35,21 @@ app.use('/empleados', employeeRoutes);
 app.use('/payroll', payrollRoutes);
 app.use('/bitacora', bitacoraRoutes);
 app.use('/bonos', bonusRoutes);
+app.use('/api', apiRoutes);
+
+function isApiRequest(req) {
+    return req.originalUrl.startsWith('/api');
+}
 
 // Manejo de errores 404
 app.use((req, res) => {
+    if (isApiRequest(req)) {
+        return res.status(404).json({
+            success: false,
+            message: 'Endpoint no encontrado'
+        });
+    }
+
     res.status(404).render('error', {
         title: 'Página no encontrada',
         message: 'La página que buscas no existe',
@@ -47,6 +60,14 @@ app.use((req, res) => {
 // Manejo de errores del servidor
 app.use((err, req, res, next) => {
     console.error(err.stack);
+
+    if (isApiRequest(req)) {
+        return res.status(err.status || 500).json({
+            success: false,
+            message: err.message || 'Error en el servidor'
+        });
+    }
+
     res.status(err.status || 500).render('error', {
         title: 'Error',
         message: err.message || 'Error en el servidor',

@@ -1,10 +1,14 @@
 require('dotenv').config();
 
-// Detectar el dialecto de base de datos (mysql o mssql)
-const dialect = process.env.DB_DIALECT || 'mssql';
+// Detectar el dialecto de base de datos (postgres o mssql)
+const dialect = process.env.DB_DIALECT || 'postgres';
 
 // Configurar puerto por defecto según el dialecto
-const defaultPort = dialect === 'mysql' ? 3306 : 1433;
+const defaultPorts = {
+  postgres: 5432,
+  mssql: 1433
+};
+const defaultPort = defaultPorts[dialect] || 5432;
 
 // Configurar opciones específicas del dialecto
 const getDialectOptions = () => {
@@ -15,7 +19,7 @@ const getDialectOptions = () => {
         trustServerCertificate: true
       }
     };
-  } else if (dialect === 'mysql') {
+  } else if (dialect === 'postgres') {
     return {
       connectTimeout: 10000
     };

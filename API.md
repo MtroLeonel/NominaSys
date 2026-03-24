@@ -37,6 +37,79 @@ Configuraciones de la aplicación (base de datos, etc.).
 
 ## 🔌 Endpoints Disponibles
 
+## 🌐 Web vs API
+
+El proyecto ahora expone dos capas:
+
+- **Rutas Web (vistas EJS)**: Devuelven HTML para navegador
+- **Rutas API (`/api`)**: Devuelven JSON para Postman o frontend externo
+
+---
+
+## 🔐 Autenticación API (JWT)
+
+### `POST /api/auth/login`
+- **Descripción**: Inicia sesión y genera token JWT
+- **Body**:
+```json
+{
+  "email": "admin@sigch.local",
+  "password": "changeme"
+}
+```
+- **Response**:
+```json
+{
+  "success": true,
+  "message": "Login exitoso",
+  "token": "<jwt>",
+  "user": {
+    "id": 1,
+    "email": "admin@sigch.local",
+    "role": "admin"
+  }
+}
+```
+
+### Header requerido en rutas protegidas
+```http
+Authorization: Bearer <jwt>
+```
+
+---
+
+## 🧩 Endpoints API JSON (`/api`)
+
+> Excepto `/api/auth/login` y `/api/health`, todos requieren JWT.
+
+### `GET /api/health`
+- Verifica que la API esté operativa.
+
+### Empleados
+- `GET /api/empleados`
+- `POST /api/empleados`
+
+### Departamentos
+- `GET /api/departamentos`
+- `POST /api/departamentos`
+
+### Puestos
+- `GET /api/puestos`
+- `POST /api/puestos`
+
+### Nómina
+- `GET /api/payroll`
+- `POST /api/payroll`
+
+### Bonos
+- `GET /api/bonos`
+- `POST /api/bonos`
+
+### Bitácora
+- `GET /api/bitacora`
+
+---
+
 ### Página Principal
 
 #### `GET /`
@@ -493,6 +566,269 @@ describe('GET /empleados', () => {
 - [Sequelize Docs](https://sequelize.org/)
 - [EJS Docs](https://ejs.co/)
 - [Bulma CSS](https://bulma.io/)
+
+## 📋 Resumen Final de Endpoints API (Método + JSON de Respuesta)
+
+> Base URL sugerida: `http://localhost:3000`
+
+### 1) `POST /api/auth/login`
+- **Método**: `POST`
+- **Protegido con JWT**: No
+- **Respuesta exitosa (200)**:
+```json
+{
+  "success": true,
+  "message": "Login exitoso",
+  "token": "<jwt>",
+  "user": {
+    "id": 1,
+    "email": "admin@sigch.local",
+    "role": "admin"
+  }
+}
+```
+
+### 2) `GET /api/health`
+- **Método**: `GET`
+- **Protegido con JWT**: No
+- **Respuesta exitosa (200)**:
+```json
+{
+  "success": true,
+  "message": "API operativa"
+}
+```
+
+### 3) `GET /api/empleados`
+- **Método**: `GET`
+- **Protegido con JWT**: Sí
+- **Respuesta exitosa (200)**:
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "firstName": "Juan",
+      "lastName": "Pérez",
+      "curp": "JUAP800101HDFRRN09",
+      "hireDate": "2024-01-15",
+      "dailySalary": "1200.00",
+      "status": "activo",
+      "Assignments": []
+    }
+  ]
+}
+```
+
+### 4) `POST /api/empleados`
+- **Método**: `POST`
+- **Protegido con JWT**: Sí
+- **Respuesta exitosa (201)**:
+```json
+{
+  "success": true,
+  "data": {
+    "id": 3,
+    "firstName": "Ana",
+    "lastName": "García",
+    "curp": "AAGA900101MDFRRL09",
+    "hireDate": "2026-01-15",
+    "dailySalary": "950.00",
+    "status": "activo",
+    "Assignments": []
+  }
+}
+```
+
+### 5) `GET /api/departamentos`
+- **Método**: `GET`
+- **Protegido con JWT**: Sí
+- **Respuesta exitosa (200)**:
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "name": "TI",
+      "code": "TI",
+      "status": "activo"
+    }
+  ]
+}
+```
+
+### 6) `POST /api/departamentos`
+- **Método**: `POST`
+- **Protegido con JWT**: Sí
+- **Respuesta exitosa (201)**:
+```json
+{
+  "success": true,
+  "data": {
+    "id": 3,
+    "name": "Finanzas",
+    "code": "FIN",
+    "status": "activo"
+  }
+}
+```
+
+### 7) `GET /api/puestos`
+- **Método**: `GET`
+- **Protegido con JWT**: Sí
+- **Respuesta exitosa (200)**:
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "name": "Senior Dev",
+      "level": "Sr",
+      "baseSalary": "1200.00",
+      "status": "activo"
+    }
+  ]
+}
+```
+
+### 8) `POST /api/puestos`
+- **Método**: `POST`
+- **Protegido con JWT**: Sí
+- **Respuesta exitosa (201)**:
+```json
+{
+  "success": true,
+  "data": {
+    "id": 3,
+    "name": "Analista",
+    "level": "Mid",
+    "baseSalary": "900.00",
+    "status": "activo"
+  }
+}
+```
+
+### 9) `GET /api/payroll`
+- **Método**: `GET`
+- **Protegido con JWT**: Sí
+- **Respuesta exitosa (200)**:
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "type": "quincenal",
+      "startDate": "2024-02-01",
+      "endDate": "2024-02-15",
+      "status": "abierto"
+    }
+  ]
+}
+```
+
+### 10) `POST /api/payroll`
+- **Método**: `POST`
+- **Protegido con JWT**: Sí
+- **Respuesta exitosa (201)**:
+```json
+{
+  "success": true,
+  "data": {
+    "id": 2,
+    "type": "semanal",
+    "startDate": "2026-03-01",
+    "endDate": "2026-03-07",
+    "status": "abierto"
+  }
+}
+```
+
+### 11) `GET /api/bonos`
+- **Método**: `GET`
+- **Protegido con JWT**: Sí
+- **Respuesta exitosa (200)**:
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "name": "Bono de puntualidad",
+      "amountType": "percent",
+      "amount": "5.00",
+      "active": true
+    }
+  ]
+}
+```
+
+### 12) `POST /api/bonos`
+- **Método**: `POST`
+- **Protegido con JWT**: Sí
+- **Respuesta exitosa (201)**:
+```json
+{
+  "success": true,
+  "data": {
+    "id": 2,
+    "name": "Bono de productividad",
+    "amountType": "fixed",
+    "amount": "750.00",
+    "active": true
+  }
+}
+```
+
+### 13) `GET /api/bitacora`
+- **Método**: `GET`
+- **Protegido con JWT**: Sí
+- **Respuesta exitosa (200)**:
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "employeeId": 1,
+      "changedBy": 1,
+      "changeType": "salario",
+      "previousValue": "1150",
+      "newValue": "1200",
+      "reason": "Ajuste por desempeño"
+    }
+  ]
+}
+```
+
+### Respuesta de error común en endpoints protegidos
+
+#### Sin token (401)
+```json
+{
+  "success": false,
+  "message": "Token no proporcionado. Usa Authorization: Bearer <token>"
+}
+```
+
+#### Token inválido o expirado (403)
+```json
+{
+  "success": false,
+  "message": "Token invalido o expirado"
+}
+```
+
+#### Endpoint no encontrado en API (404)
+```json
+{
+  "success": false,
+  "message": "Endpoint no encontrado"
+}
+```
 
 ---
 

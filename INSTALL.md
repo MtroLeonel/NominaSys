@@ -5,7 +5,7 @@ Esta guía te ayudará a poner en marcha el sistema en menos de 5 minutos.
 ## ✅ Requisitos
 
 - Node.js instalado
-- MySQL o SQL Server instalado y corriendo
+- PostgreSQL o SQL Server instalado y corriendo
 
 ## 📦 Instalación en 5 Pasos
 
@@ -16,7 +16,7 @@ npm install
 
 ### Paso 2: Crear base de datos
 
-**MySQL:**
+**PostgreSQL:**
 ```sql
 CREATE DATABASE practicanomina;
 ```
@@ -35,12 +35,12 @@ copy .env.example .env
 
 Edita el archivo `.env` con tus credenciales:
 
-**Para MySQL:**
+**Para PostgreSQL:**
 ```env
-DB_DIALECT=mysql
+DB_DIALECT=postgres
 DB_HOST=localhost
-DB_PORT=3306
-DB_USER=root
+DB_PORT=5432
+DB_USER=postgres
 DB_PASSWORD=tu_contraseña
 DB_NAME=practicanomina
 ```
