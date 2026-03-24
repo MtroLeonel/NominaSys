@@ -15,7 +15,7 @@ Controllers (Lógica de negocio)
     ↓
 Models (Sequelize ORM)
     ↓
-Base de Datos (MySQL/MSSQL)
+Base de Datos (PostgreSQL/MySQL)
 ```
 
 ## 📂 Estructura de Carpetas
@@ -832,4 +832,4 @@ describe('GET /empleados', () => {
 
 ---
 
-¿Tienes preguntas? Consulta el [README.md](README.md) principal o revisa el código fuente.
+¿Tienes preguntas? Consulta el [README.md](../README.md) principal o revisa el codigo fuente.

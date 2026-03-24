@@ -544,9 +544,9 @@ PROYECCIÓN TOTAL: $3,601,800
 
 Si necesitas ayuda adicional:
 
-1. Consulta el [README.md](README.md) principal
+1. Consulta el [README.md](../README.md) principal
 2. Revisa la [Documentación Técnica](API.md)
-3. Consulta [Solución de Problemas](README.md#-solución-de-problemas)
+3. Consulta [Solucion de Problemas](../README.md)
 4. Abre un issue en GitHub
 
 ---

@@ -78,13 +78,13 @@ app.use((err, req, res, next) => {
 // Sincronizar base de datos e iniciar servidor
 db.sequelize.sync({ alter: false })
     .then(() => {
-        console.log('✓ Conexión a SQL Server establecida correctamente');
+        console.log('✓ Conexión a base de datos establecida correctamente');
         app.listen(PORT, () => {
             console.log(`✓ Servidor corriendo en http://localhost:${PORT}`);
         });
     })
     .catch(err => {
-        console.error('✗ Error al conectar con SQL Server:', err);
+        console.error('✗ Error al conectar con la base de datos:', err);
     });
 
 module.exports = app;

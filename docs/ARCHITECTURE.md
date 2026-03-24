@@ -62,7 +62,7 @@ Este documento explica visualmente cómo funciona el sistema de nómina.
                          ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                  BASE DE DATOS                               │
-│              (MySQL / SQL Server)                            │
+│              (PostgreSQL / MySQL)                            │
 │  ┌─────────┐ ┌──────────┐ ┌──────────┐ ┌─────────┐         │
 │  │Employees│ │Department│ │Positions │ │Bonuses  │         │
 │  └─────────┘ └──────────┘ └──────────┘ └─────────┘         │
@@ -392,11 +392,11 @@ FIN: Usuario ve periodo con todas las entradas generadas
 │   options = {…}   │  • port 3306 │
 │               │   │  • timeout   │
 │ if (dialect   │   └──────────────┘
-│   === 'mssql')│──►┌──────────────┐
-│   port = 1433 │   │ MSSQL Config │
-│   options = {…}   │  • port 1433 │
-│               │   │  • encrypt   │
-└───────┬───────┘   │  • trust cert│
+│   === 'postgres')►┌──────────────┐
+│   port = 5432 │   │ PostgreSQL   │
+│   options = {…}   │  • port 5432 │
+│               │   │  • timeout   │
+└───────┬───────┘   │  • ssl opt   │
         │           └──────────────┘
         │
         ▼
@@ -409,7 +409,7 @@ FIN: Usuario ve periodo con todas las entradas generadas
         │                       │
         ▼                       ▼
 ┌──────────────┐        ┌──────────────┐
-│    MySQL     │        │  SQL Server  │
+│    MySQL     │        │ PostgreSQL   │
 │   Database   │        │   Database   │
 └──────────────┘        └──────────────┘
 ```
@@ -671,7 +671,7 @@ CONSTANTES:
 │          └─► Controllers (Lógica)                       │
 │                                                          │
 │  Base de Datos                                           │
-│  └─► MySQL / SQL Server (Flexible)                      │
+│  └─► PostgreSQL / MySQL (Flexible)                      │
 │      └─► 9 Tablas principales                           │
 │                                                          │
 │  Funcionalidades                                         │
@@ -687,7 +687,7 @@ CONSTANTES:
 ---
 
 **Para más información, consulta:**
-- [README.md](README.md) - Documentación principal
+- [README.md](../README.md) - Documentacion principal
 - [API.md](API.md) - Detalles técnicos
 - [EJEMPLOS.md](EJEMPLOS.md) - Casos de uso
 
