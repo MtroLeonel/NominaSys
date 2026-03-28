@@ -7,10 +7,37 @@ const db = require('./models');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const allowedOrigins = (process.env.CORS_ORIGINS || '')
+const corsOriginsRaw = process.env.CORS_ORIGINS || 'https://nominasys.fly.dev,http://localhost:*,http://127.0.0.1:*';
+const allowedOrigins = corsOriginsRaw
     .split(',')
     .map(origin => origin.trim())
     .filter(Boolean);
+
+if (!process.env.CORS_ORIGINS) {
+    console.warn('CORS_ORIGINS no está definido. Usando fallback seguro para Fly + localhost.');
+}
+
+function normalizeOrigin(origin) {
+    return origin.replace(/\/$/, '');
+}
+
+function patternToRegex(pattern) {
+    const escaped = pattern.replace(/[.+?^${}()|[\]\\]/g, '\\$&');
+    return new RegExp(`^${escaped.replace(/\*/g, '.*')}$`);
+}
+
+function isAllowedOrigin(origin) {
+    const normalizedOrigin = normalizeOrigin(origin);
+    return allowedOrigins.some(pattern => {
+        const normalizedPattern = normalizeOrigin(pattern);
+
+        if (normalizedPattern.includes('*')) {
+            return patternToRegex(normalizedPattern).test(normalizedOrigin);
+        }
+
+        return normalizedPattern === normalizedOrigin;
+    });
+}
 
 const corsOptions = {
     origin: (origin, callback) => {
@@ -19,7 +46,7 @@ const corsOptions = {
             return callback(null, true);
         }
 
-        if (allowedOrigins.includes(origin)) {
+        if (isAllowedOrigin(origin)) {
             return callback(null, true);
         }
 

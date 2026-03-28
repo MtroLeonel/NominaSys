@@ -51,7 +51,7 @@ La API usa `cors` con una lista blanca de orígenes definida por variable de ent
 ### Variable de entorno
 
 ```env
-CORS_ORIGINS=https://nominasys.fly.dev,http://localhost:56758
+CORS_ORIGINS=https://nominasys.fly.dev,http://localhost:*,http://127.0.0.1:*
 ```
 
 ### Comportamiento
@@ -59,11 +59,13 @@ CORS_ORIGINS=https://nominasys.fly.dev,http://localhost:56758
 - Solo los orígenes incluidos en `CORS_ORIGINS` pueden consumir la API desde navegador.
 - Requests sin header `Origin` (por ejemplo Postman o curl) están permitidos.
 - Si un origen no está en lista blanca, el servidor responde con error de CORS.
+- Se admite wildcard `*` en puertos para desarrollo local (ej: `http://localhost:*`).
 
 ### Recomendación para despliegues
 
 - Mantener `CORS_ORIGINS` diferente por ambiente (`development`, `staging`, `production`).
 - Evitar hardcodear dominios en el código; configurar siempre desde `.env`.
+- En Fly, definir `CORS_ORIGINS` como variable/secreto del runtime (`fly secrets set`), ya que `.env` no se copia al contenedor.
 
 ---
 
