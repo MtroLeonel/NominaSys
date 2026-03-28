@@ -2,10 +2,30 @@ require('dotenv').config();
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
+const cors = require('cors');
 const db = require('./models');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const allowedOrigins = (process.env.CORS_ORIGINS || '')
+    .split(',')
+    .map(origin => origin.trim())
+    .filter(Boolean);
+
+const corsOptions = {
+    origin: (origin, callback) => {
+        // Permite requests sin Origin (Postman, curl, health checks internos).
+        if (!origin) {
+            return callback(null, true);
+        }
+
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+
+        return callback(new Error('No permitido por CORS'));
+    }
+};
 
 // Configuración del motor de plantillas EJS
 app.set('view engine', 'ejs');
@@ -14,6 +34,7 @@ app.use(expressLayouts);
 app.set('layout', 'layouts/main');
 
 // Middlewares
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));

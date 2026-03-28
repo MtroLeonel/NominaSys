@@ -44,6 +44,27 @@ El proyecto ahora expone dos capas:
 - **Rutas Web (vistas EJS)**: Devuelven HTML para navegador
 - **Rutas API (`/api`)**: Devuelven JSON para Postman o frontend externo
 
+## 🛡️ Configuración CORS
+
+La API usa `cors` con una lista blanca de orígenes definida por variable de entorno.
+
+### Variable de entorno
+
+```env
+CORS_ORIGINS=https://nominasys.fly.dev,http://localhost:56758
+```
+
+### Comportamiento
+
+- Solo los orígenes incluidos en `CORS_ORIGINS` pueden consumir la API desde navegador.
+- Requests sin header `Origin` (por ejemplo Postman o curl) están permitidos.
+- Si un origen no está en lista blanca, el servidor responde con error de CORS.
+
+### Recomendación para despliegues
+
+- Mantener `CORS_ORIGINS` diferente por ambiente (`development`, `staging`, `production`).
+- Evitar hardcodear dominios en el código; configurar siempre desde `.env`.
+
 ---
 
 ## 🔐 Autenticación API (JWT)
